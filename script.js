@@ -44,6 +44,7 @@ function columnProcess (columnElement) {
 	const headerElement = columnElement.querySelector('.column-header') 
 	headerElement.addEventListener('dblclick', (event) => {
 		headerElement.setAttribute('contenteditable', 'true') 
+		setCaret(headerElement)
 		headerElement.focus() 
 	}) 
 	
@@ -56,10 +57,20 @@ function columnProcess (columnElement) {
 function noteProcess(noteElement) {
 	noteElement.addEventListener('dblclick', (event) => {
 		noteElement.setAttribute('contenteditable', 'true') 
+		setCaret(noteElement)
 		noteElement.focus() 
 	}) 
 	
 	noteElement.addEventListener('blur', (event) => {
 		noteElement.removeAttribute('contenteditable') 
 	}) 		
+}
+
+function setCaret(node){
+	const range = document.createRange();
+	const sel = window.getSelection();
+	range.setStart(node.childNodes[0], node.textContent.length);
+	range.collapse(true);
+	sel.removeAllRanges();
+	sel.addRange(range);
 }
