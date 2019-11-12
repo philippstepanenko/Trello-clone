@@ -80,7 +80,8 @@ function noteProcess(noteElement) {
 		noteElement.removeAttribute('contenteditable') 
 		noteElement.setAttribute('draggable', 'true')
 		noteElement.closest('.column').setAttribute('draggable', 'true')
-		if (!noteElement.textContent.trim().length){
+		noteElement.textContent = noteElement.textContent.trim()
+		if (!noteElement.textContent.length){
 			noteElement.remove()
 		}
 	})
